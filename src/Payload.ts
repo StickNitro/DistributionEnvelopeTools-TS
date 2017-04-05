@@ -1,5 +1,5 @@
 import * as uuid from "uuid";
-import { Dictionary } from "typescript-collections";
+import { Dictionary, Set } from "typescript-collections";
 import { X509Certificate } from "./X509Certificate";
 
 export class Payload {
@@ -13,6 +13,7 @@ export class Payload {
     private _encryptedContent: string;
     private _receivedReaders: Dictionary<string, string> = null;
     private _allowNonUsageCertificates: boolean = true;
+    private readonly _readerCerts: Set<X509Certificate> = new Set<X509Certificate>();
 
     constructor(mimeType: string);
     constructor(idOrMimeType: string, mimeType?: string, profileId?: string, base64?: string, compressed?: string, encrypted?: string) {
@@ -64,5 +65,22 @@ export class Payload {
         }
 
         return true;
+    }
+
+    public addReaderCertificate(certificate: X509Certificate): void {
+        if (certificate === null) {
+            throw new Error("Null certificate");
+        }
+
+        if (!this.checkCertificateDateRange(certificate)) {
+            throw new Error("Invalid certificate: out of date range");
+        }
+
+        if (!this.checkKeyUsage(certificate)) {
+            throw new Error(`Certificate ${certificate.subject.commonName} not valid for data encipherment`);
+        }
+
+        this._encrypted = true;
+        this._readerCerts.add(certificate);
     }
 }
