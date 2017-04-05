@@ -1,0 +1,44 @@
+{
+  "name": "distributionenvelopetools-ts",
+  "version": "0.1.0",
+  "description": "NHS Interoperability Tool Kit - ITK Distribution Envelope Library",
+  "main": "bin/index.js",
+  "scripts": {
+    "start": "node .",
+    "clean": "rm -rf ./bin",
+    "prepublish": "tsc",
+    "pretest": "tsc",
+    "test": "mocha bin/test/**/*Test.js --reporter spec"
+  },
+  "keywords": [],
+  "author": "Neil Stevens <stevensn99@gmail.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/chai": "^3.4.35",
+    "@types/mocha": "^2.2.40",
+    "@types/typescript": "^2.0.0",
+    "@types/uuid": "^2.0.29",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "typescript": "^2.2.1"
+  },
+  "dependencies": {
+    "@types/pem": "^1.9.1",
+    "pem": "^1.9.4",
+    "string-builder": "^0.1.4",
+    "typescript-collections": "^1.2.3",
+    "uuid": "^3.0.1",
+    "x509": "^0.3.2"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://stevensn99@github.com/StickNitro/DistributionEnvelopeTools-TS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/StickNitro/DistributionEnvelopeTools-TS/issues"
+  },
+  "homepage": "https://github.com/StickNitro/DistributionEnvelopeTools-TS#readme"
+}
